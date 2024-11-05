@@ -1,5 +1,5 @@
 -- Таблиця користувачів
-CREATE TABLE User (
+CREATE TABLE "User" (
     user_id INT PRIMARY KEY,
     name VARCHAR(50) NOT NULL CHECK (name ~ '^[A-Za-zА-Яа-я]+$'), -- Тільки букви
     age SMALLINT CHECK (age BETWEEN 10 AND 100), -- Вік у межах від 10 до 100 років
@@ -7,7 +7,7 @@ CREATE TABLE User (
 );
 
 -- Таблиця розкладів
-CREATE TABLE Schedule (
+CREATE TABLE "Schedule" (
     schedule_id INT PRIMARY KEY,
     time TIME NOT NULL,
     affairs VARCHAR(255) CHECK (affairs ~ '^[A-Za-zА-Яа-я0-9, ]+$'), -- Тільки букви, цифри, коми та пробіли
