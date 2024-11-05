@@ -1,42 +1,43 @@
--- Таблиця користувачів
-CREATE TABLE "User" (
+CREATE TABLE users (
     user_id INT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL CHECK (name ~ '^[A-Za-zА-Яа-я]+$'), -- Тільки букви
-    age SMALLINT CHECK (age BETWEEN 10 AND 100), -- Вік у межах від 10 до 100 років
-    videoPreferences VARCHAR(100) CHECK (videoPreferences ~ '^[A-Za-z, ]+$') -- Тільки букви, коми та пробіли
+    name VARCHAR(50) NOT NULL 
+        CHECK (name ~ '^[A-Za-zА-Яа-я]+$'),
+    age SMALLINT CHECK (age BETWEEN 10 AND 100),
+    video_preferences VARCHAR(100) 
+        CHECK (video_preferences ~ '^[A-Za-z, ]+$')
 );
 
--- Таблиця розкладів
-CREATE TABLE "Schedule" (
+CREATE TABLE schedule (
     schedule_id INT PRIMARY KEY,
     time TIME NOT NULL,
-    affairs VARCHAR(255) CHECK (affairs ~ '^[A-Za-zА-Яа-я0-9, ]+$'), -- Тільки букви, цифри, коми та пробіли
+    affairs VARCHAR(255) 
+        CHECK (affairs ~ '^[A-Za-zА-Яа-я0-9, ]+$'),
     user_id INT NOT NULL,
     system_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (system_id) REFERENCES System(system_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (system_id) REFERENCES "system"(system_id)
 );
 
--- Таблиця відеопрограм
-CREATE TABLE VideoProgram (
-    videoProgram_id INT PRIMARY KEY,
-    genres VARCHAR(255) CHECK (genres ~ '^[A-Za-z, ]+$'), -- Тільки букви, коми та пробіли
+CREATE TABLE video_programs (
+    video_program_id INT PRIMARY KEY,
+    genres VARCHAR(255) 
+        CHECK (genres ~ '^[A-Za-z, ]+$'),
     user_id INT NOT NULL,
     system_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (system_id) REFERENCES System(system_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (system_id) REFERENCES "system"(system_id)
 );
 
--- Таблиця відеоуроків
-CREATE TABLE Videolesson (
+CREATE TABLE video_lessons (
     lesson_id INT PRIMARY KEY,
-    title VARCHAR(100) NOT NULL CHECK (title ~ '^[A-Za-z0-9 ]+$'), -- Тільки букви, цифри та пробіли
+    title VARCHAR(100) NOT NULL 
+        CHECK (title ~ '^[A-Za-z0-9 ]+$'),
     duration INTERVAL HOUR TO SECOND NOT NULL,
-    videoProgram_id INT NOT NULL,
-    FOREIGN KEY (videoProgram_id) REFERENCES VideoProgram(videoProgram_id)
+    video_program_id INT NOT NULL,
+    FOREIGN KEY (video_program_id) REFERENCES video_programs(video_program_id)
 );
 
--- Таблиця систем
-CREATE TABLE System (
+CREATE TABLE system (
     system_id INT PRIMARY KEY
 );
+
