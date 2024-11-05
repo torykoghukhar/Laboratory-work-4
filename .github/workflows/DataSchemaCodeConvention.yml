@@ -17,4 +17,4 @@ jobs:
 
       - name: Run SQLFluff Linting
         run: |
-          sqlfluff lint $GITHUB_WORKSPACE/DataSchema.sql --dialect postgres 
+          run: sqlfluff lint $GITHUB_WORKSPACE/DataSchema.sql --dialect oracle
