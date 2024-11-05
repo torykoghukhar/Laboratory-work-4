@@ -39,4 +39,3 @@ CREATE TABLE video_lessons (
 CREATE TABLE system (
     system_id INT PRIMARY KEY
 );
-
